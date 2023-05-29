@@ -1,10 +1,5 @@
-import { Component, Input, Self } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  FormControlDirective,
-  NgControl,
-} from '@angular/forms';
+import { Component, Input, Optional, Self } from '@angular/core';
+import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
@@ -14,10 +9,15 @@ import {
 export class TextInputComponent implements ControlValueAccessor {
   @Input() label: string;
   @Input() type = 'text';
-  // @Input() formControl: FormControl;
-  constructor(@Self() public ngControl: FormControlDirective) {
-    this.ngControl.valueAccessor = this;
+  @Input() control: FormControl;
+
+  constructor(@Self() @Optional() public ngControl: NgControl) {
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+      this.control = this.ngControl.control as FormControl;
+    }
   }
+
   writeValue(obj: any): void {}
   registerOnChange(fn: any): void {}
   registerOnTouched(fn: any): void {}

@@ -7,8 +7,8 @@ import {
   Validators,
   FormControlDirective,
   FormControl,
+  FormBuilder,
 } from '@angular/forms';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,25 +16,55 @@ import {
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  constructor(private accountService: AccountService) {
-    this.initializeForm();
+  maxDate: Date;
+  constructor(private formBuilder: FormBuilder) {
+    this.initializeFormWithFormBuilder();
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
-  initializeForm() {
-    this.registerForm = new FormGroup({
-      userName: new FormControl('', Validators.required),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(10),
-      ]),
-      confirmPassword: new FormControl('', [
-        Validators.required,
-        this.matchValues('password'),
-      ]),
-      gender: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required]),
-      country: new FormControl('', Validators.required),
+  // initializeFormWithFormGroup() {
+  //   this.registerForm = new FormGroup({
+  //     Name: new FormControl('', Validators.required),
+  //     email: new FormControl('', [Validators.required, Validators.email]),
+  //     password: new FormControl('', [
+  //       Validators.required,
+  //       Validators.minLength(5),
+  //       Validators.maxLength(10),
+  //     ]),
+  //     confirmPassword: new FormControl('', [
+  //       Validators.required,
+  //       this.matchValues('password'),
+  //     ]),
+  //     gender: new FormControl('', [Validators.required]),
+  //     city: new FormControl('', [Validators.required]),
+  //     country: new FormControl('', Validators.required),
+  //   });
+  //   this.registerForm.controls['password'].valueChanges.subscribe(() => {
+  //     this.registerForm.controls['confirmPassword'].updateValueAndValidity();
+  //   });
+  // }
+
+  initializeFormWithFormBuilder() {
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(10),
+        ],
+      ],
+      confirmPassword: [
+        null,
+        [Validators.required, this.matchValues('password')],
+      ],
+      dateOfBirth: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
     });
     this.registerForm.controls['password'].valueChanges.subscribe(() => {
       this.registerForm.controls['confirmPassword'].updateValueAndValidity();
@@ -61,15 +91,15 @@ export class RegisterComponent implements OnInit {
     };
   }
   Register(): void {
-    // console.log(this.registerForm.value);
-    this.accountService.register(this.registerForm.value).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    console.log(this.registerForm.value);
+    // this.accountService.register(this.registerForm.value).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   }
   ngOnInit(): void {}
 }

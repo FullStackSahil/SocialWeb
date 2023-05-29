@@ -4,28 +4,40 @@
       Sign Up
     </h2>
     <form [formGroup]="registerForm" (ngSubmit)="Register()">
-      <!-- <app-text-input [formControl]='registerForm.controls["userName"]' [label]='"userName"'>
+      <app-text-input [control]='registerForm.controls["name"]' [label]='"name"'>
       </app-text-input>
-      <app-text-input [formControl]='registerForm.controls["password"]' [label]='"password"' [type]='"password"'>
+
+      <!--   <app-text-input formControl='registerForm.controls["password"]' label="password" type="password">
       </app-text-input>
-      <app-text-input [formControl]='registerForm.controls["confirmPassword"]' [label]='"confirmPassword"'
+
+      <app-text-input FormControl='registerForm.controls["confirmPassword"]' [label]='"confirmPassword"'
         [type]='"password"'>
       </app-text-input>
-      <app-text-input [formControl]='registerForm.controls["city"]' [label]='"city"'>
+      <app-text-input FormControl='registerForm.controls["city"]' [label]='"city"'>
       </app-text-input>
-      <app-text-input [formControl]='registerForm.controls["country"]' [label]='"country"'>
+      <app-text-input FormControl='registerForm.controls["country"]' [label]='"country"'>
       </app-text-input> -->
 
-      <div class="form-group">
+      <!-- userName -->
+      <!-- <div class="form-group">
         <input [class.is-invalid]='registerForm.get("userName").errors && registerForm.get("userName").touched'
           type="text" class="form-control" formControlName="userName" placeholder="User Name" />
         <div class="invalid-feedback" *ngIf='registerForm.get("userName").hasError("required")'>
           Please Enter User name
         </div>
 
-      </div>
+      </div> -->
+      <!-- Email -->
+      <!-- <div class="form-group">
+        <input [class.is-invalid]='registerForm.get("email").errors && registerForm.get("email").touched' type="email"
+          class="form-control" formControlName="email" placeholder="Email" />
+        <div class="invalid-feedback" *ngIf='registerForm.get("email").hasError("required")'>
+          Please Enter Your Email Address
+        </div>
 
-      <div class="form-group">
+      </div> -->
+      <!-- passwordRequired -->
+      <!-- <div class="form-group">
         <input [class.is-invalid]="registerForm.get('password').errors && registerForm.get('password').touched"
           type="text" class="form-control" formControlName="password" placeholder="Password" />
         <div class="invalid-feedback" *ngIf='registerForm.get("password").hasError("required")'>
@@ -37,9 +49,9 @@
         <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength')">
           Please Enter Maximum Length (10)
         </div>
-      </div>
-
-      <div class="form-group">
+      </div> -->
+      <!-- confirmPasswordConfirmation -->
+      <!-- <div class="form-group">
         <input
           [class.is-invalid]="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched "
           type="text" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" />
@@ -49,15 +61,17 @@
         <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword').hasError('isMatching')">
           Password doest not match
         </div>
-      </div>
-
+      </div> -->
+      <!-- city -->
       <div class="form-group">
         <input type="text" class="form-control" formControlName="city" placeholder="city" />
       </div>
-
+      <!-- country -->
       <div class="form-group">
         <input type="text" class="form-control" formControlName="country" placeholder="country" />
       </div>
+
+      <!-- Gender -->
       <div class="mb-3">
         <label style="margin-right:10px"> I am a: </label>
         <label class="form-check-label">
@@ -68,8 +82,12 @@
         </label>
       </div>
       <div class="footer">
-        <input type="submit" [disabled]="!registerForm.valid" value="submit" class="btn btn-primary" />
+        <!-- <input type="submit" [disabled]="!registerForm.valid" value="submit" class="btn btn-primary" /> -->
+        <input type="submit" value="submit" class="btn btn-primary" />
       </div>
+      <!-- DateOfBirth -->
+      <!-- <app-date-input control='registerForm.controls["DateOfBirth"]' [label]='"Date Of Birth"'
+        [maxDate]='maxDate'></app-date-input> -->
 
     </form>
   </div>
